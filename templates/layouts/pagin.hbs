@@ -1,0 +1,22 @@
+---
+layout: default
+---
+  {% body %}
+
+  <h2>Latest news</h2>
+
+  <!-- paginator adds an array of news items to view.data.items each item is a
+        vinyl object with the usual attribues  -->
+  {{#forEach items }}
+    <p><a href='{{{data.finalPath}}}' >{{{data.title}}}</a></p>
+  {{/forEach}}
+
+  <!-- a very simple paginator. Handlebars-helpers has helpers name first & last, so I use `this` -->
+  <div class="paginator">
+    <a href="/news-{{this.first}}.html">&lt;&lt;</a>
+    &nbsp;
+    <a href="/news-{{this.last}}.html">&gt;&gt;</a>
+  </div>
+<br>
+  <!-- used to inspect view data, requires you to copy some front-end assets from node_modules/midden  -->
+  {{midden "view.data"}}

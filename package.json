@@ -1,0 +1,33 @@
+{
+  "name": "asm-pager-test",
+  "version": "1.0.0",
+  "description": "Testing pagination methods for Assemble.js",
+  "main": "assemble",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/criticalmash/asm-pager-test.git"
+  },
+  "keywords": [
+    "assemble"
+  ],
+  "author": "John O'Donnell <john@criticalmash.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/criticalmash/asm-pager-test/issues"
+  },
+  "homepage": "https://github.com/criticalmash/asm-pager-test#readme",
+  "dependencies": {
+    "assemble-midden": "^0.4.0",
+    "base-watch": "^0.1.3",
+    "browser-sync": "^2.18.13",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-extname": "^0.2.2",
+    "handlebars-helpers": "^0.9.8"
+  },
+  "devDependencies": {
+    "assemble": "^0.24.3"
+  }
+}
