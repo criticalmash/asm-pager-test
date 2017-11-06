@@ -16,6 +16,8 @@ Looping over this sublist you can then create a second set a views that get rend
 ## Gotchas
 The paginator function adds many useful data attributes you can use while templating, including `first` and `last`. But Handlebar-helpers also has helpers by that name. I had to use `{{this.first}}` and `{{this.last}}` to make sure I used the right values.
 
+By default, the `view.data` inside the sublists doesn't contain any useful path data for constructing the URLS. I created a simple middleware to add that data to each sublist item before rendering.
+
 ## To Run Example
 Clone repo and cd into it
 
@@ -28,3 +30,11 @@ If you want to use midden to inspect view data
 `cp node_modules/midden/dist/styles/midden.css dist/`
 
 `assemble` builds the site and launches it in your browser
+
+## References
+(https://github.com/doowb/paginationator)
+
+(https://github.com/jonschlinkert/templates)
+
+(https://github.com/criticalmash/assemble-midden#readme)
+
