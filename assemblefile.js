@@ -34,6 +34,15 @@ app.newsitems.preRender(/\.hbs$/, function newspaths(view, next) {
     // }
     next(null, view);
 });
+app.newsitems.preRender(/\.hbs$/, function newspaths(view, next) {
+    console.log('preRender news items');
+    next(null, view);
+});
+
+app.newsindex.preRender(/\.hbs$/, function newspaths(view, next) {
+    console.log('preRender newsindex');
+    next(null, view);
+});
 
 
 /**
