@@ -15,6 +15,13 @@
       {% body %}
 
     {{!-- {{midden "view.data"}} --}}
+    <p><i>Experimenting with collections here.</i></p>
+    <p>Year is {{year}}</p>
+    {{#pages}}
+      {{#each items as |item|}}
+        <br>{{item.path }} - {{year}}  
+      {{/each}}
+    {{/pages}}
 
     <!-- find me in node_modules/midden/dist/js -->
     <script src="/midden-client.js"></script>
