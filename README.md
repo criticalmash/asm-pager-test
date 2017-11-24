@@ -8,15 +8,18 @@ Our use case is a blog, let's say you have a source directory with 25 blog posts
 
 The first page we'll name `blog-1.html`, then `blog-2.html` etc.
 
-Assemble's List objects have a built-in function called `paginate` that can take any list of views and break it up into a set of sublists, along with all the other data you need to create a set of paginated pages. By converting a renderable collection of pages into a list, you can call `list.paginate({limit: 10})` to split your list into an array of sublists.
+Assemble's List objects have a built-in function called `paginate` that can take any list of views and break it up into a set of sublists (or an array of Lists), along with all the other data you need to create a set of paginated pages. By converting a renderable collection of pages into a list, you can call `list.paginate({limit: 10})` to split your list into an array of sublists.
 
-Looping over this sublist you can then create a second set a views that get rendered out a pages, one page for each sublist. For example, if you have... TBC
+Looping over this new array you can then create a second set of views that get rendered out as pages, one page for each sublist. For example, if you have 25 blog posts that you paginated into groups of 10, the paginate function will generate an array of 3 sublists that each contain an array of posts. You use some standard Assemble methods to turn each array item into a new view with a name like 'blog-_n_.html' and stick that array of posts and other pagination info unto it's `data` attribute.
 
+You can review the `assmblefile.js` and other source code for details.
 
 ## Gotchas
 The paginator function adds many useful data attributes you can use while templating, including `first` and `last`. But Handlebar-helpers also has helpers by that name. I had to use `{{this.first}}` and `{{this.last}}` to make sure I used the right values.
 
-By default, the `view.data` inside the sublists doesn't contain any useful path data for constructing the URLS. I created a simple middleware to add that data to each sublist item before rendering.
+By default, the `view.data` inside the sublists doesn't contain any useful path data for constructing root-relative URLS. I created a simple middleware to add that data to each sublist item before rendering. [I'll probably replace this with permalinks at some point.]
+
+I've also had problems using other helpers (like moment) inside the `#each` loop that iterates over the posts. Something about Assemble List collections is keeping me from calling these helpers. After trying several different approaches, I decided to move all business logic (even simple things like date formatting) out of the templates and into the middleware. See this post [Handlebars Considered Harmful](https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/index.html) for some background.
 
 ## To Run Example
 Clone repo and cd into it
@@ -36,5 +39,9 @@ If you want to use midden to inspect view data
 
 (https://github.com/jonschlinkert/templates)
 
-(https://github.com/criticalmash/assemble-midden#readme)
+(https://github.com/criticalmash/assemble-midden)
+
+(https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/index.html)
+
+
 

@@ -3,22 +3,39 @@ layout: default
 ---
   {% body %}
 
-  <h2>Latest news</h2>
+  <h2>Latest news {{year}}</h2>
 
   <!-- paginator adds an array of news items to view.data.items each item is a
         vinyl object with the usual attribues  -->
-  {{#forEach items }}
-    <p><a href='{{{data.finalPath}}}' >{{{data.title}}}</a></p>
-  {{/forEach}}
+  {{#each items}}
+    <p><a href='{{data.finalPath}}' >{{data.title}}</a><br>
+    {{data.printDate}}  </p>
+  {{/each}}
+
+{{!--   {{#each items}}
+    {{year}}
+  {{/each}} --}}
 
   <!-- a very simple paginator. Handlebars-helpers has helpers name first & last, so I use `this` -->
   <div class="paginator">
     <a href="news-{{this.first}}.html">&lt;&lt;</a>
     &nbsp;
+    {{#if this.hasPrev}}
+      <a href="news-{{this.prev}}.html">&lt;</a>
+      &nbsp;
+    {{else}}
+      &lt;&nbsp;
+    {{/if}}
     {{#each firstTolast}}
       <a href="news-{{this}}.html" class="pageno">{{this}}</a>
     &nbsp;
     {{/each}}
+    {{#if this.hasNext}}
+      <a href="news-{{this.next}}.html">&gt;</a>
+      &nbsp;
+    {{else}}
+      &gt;&nbsp;
+    {{/if}}
     &nbsp;
     <a href="news-{{this.last}}.html">&gt;&gt;</a>
   </div>
