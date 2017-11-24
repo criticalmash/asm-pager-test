@@ -3,3 +3,9 @@ title: News 16
 published: 2017-11-01
 ---
 Contents of news post
+
+{{#pages}}
+  {{#each items as |item|}}
+    <br>{{item.path }} - {{year}}  
+  {{/each}}
+{{/pages}}

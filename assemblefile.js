@@ -43,24 +43,28 @@ app.use(watch());
  * Handlebar's is becoming to untrustworthy
  * https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/index.html
  */
-app.newsitems.preRender(/\.hbs$/, function newspaths(view, next) {
+app.newsitems.onLoad(/\.hbs$/, function newspaths(view, next) {
     if (typeof next !== 'function') {
       throw new TypeError('expected a callback function');
     }
-    view.data.finalPath = "/news/" + path.parse(view.data.path).name + ".html";
-    view.data.touch = "true";
+    if(view.data){
+      console.log('updating view: ', view.data);
+      if(view.key){
+        view.data.finalPath = "/news/" + path.parse(view.key).name + ".html";
+      }
+      view.data.touch = "true";
 
-    // create a pretty date from `published`
-    view.data.printDate = moment(view.data.published).format('MMMM Do, YYYY');
-
+      // create a pretty date from `published`
+      view.data.printDate = moment(view.data.published).format('MMMM Do, YYYY');
+    }
     next(null, view);
 });
 /**
  * Had issues registering middleware for newsIndex because I couldn't understand
  * how plurification worked. Renamed it newslist(s) and everything is fine
  */
-// app.newsitems.preRender(/\.hbs$/, function newspaths(view, next) {
-//     console.log('preRender news items');
+// app.newsitems.preRender(/\.hbs$/, function newslog(view, next) {
+//     console.log('preRender news items', view.data);
 //     next(null, view);
 // });
 
@@ -87,8 +91,15 @@ app.option('layout', 'default');
 /**
  * Renders news posts and their index pages
  */
-app.task('newspager', function(){
+app.task('newspager', function(cb){
   app.newsitems('templates/news/*.hbs');
+
+  // render news items
+  app.toStream('newsitems')
+    .pipe(app.renderFile())
+    .pipe(extname())
+    .pipe(app.dest('dist/news'));
+  
 
   // turn page collection into a list collection sorted by publication date descending
   // NOTE: assemble appears to automatically convert YFM values labeled published into a date obj
@@ -141,11 +152,7 @@ app.task('newspager', function(){
     .pipe(extname())
     .pipe(app.dest('dist'));
 
-  // render news items
-  return app.toStream('newsitems')
-    .pipe(app.renderFile())
-    .pipe(extname())
-    .pipe(app.dest('dist/news'));
+  cb();
 });
 
 /**
