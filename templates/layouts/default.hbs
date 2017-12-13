@@ -17,11 +17,11 @@
     {{!-- {{midden "view.data"}} --}}
     <p><i>Experimenting with collections here.</i></p>
     <p>Year is {{year}}</p>
-    {{#pages}}
-      {{#each items as |item|}}
-        <br>{{item.path }} - {{year}}  
+    {{#newsitems}}
+      {{#each (sortBy items "data.published") as |item|}}
+        <br>{{item.data.title}} - {{year}}
       {{/each}}
-    {{/pages}}
+    {{/newsitems}}
 
     <!-- find me in node_modules/midden/dist/js -->
     <script src="/midden-client.js"></script>
