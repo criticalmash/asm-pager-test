@@ -8,6 +8,7 @@ var watch = require('base-watch');
 var app = assemble();
 var path = require('path');
 var moment = require('moment');
+var clone = require('clone');
 
 // custom collections
 /**
@@ -43,22 +44,22 @@ app.use(watch());
  * Handlebar's is becoming to untrustworthy
  * https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/index.html
  */
-// app.newsitems.onLoad(/\.hbs$/, function newspaths(view, next) {
-//     if (typeof next !== 'function') {
-//       throw new TypeError('expected a callback function');
-//     }
-//     if(view.data){
-//       console.log('updating view: ', view.data);
-//       if(view.key){
-//         view.data.finalPath = "/news/" + path.parse(view.key).name + ".html";
-//       }
-//       view.data.touch = "true";
+app.newsitems.onLoad(/\.hbs$/, function newspaths(view, next) {
+    if (typeof next !== 'function') {
+      throw new TypeError('expected a callback function');
+    }
+    if(view.data){
+      console.log('updating view: ', view.data);
+      if(view.key){
+        view.data.finalPath = "/news/" + path.parse(view.key).name + ".html";
+      }
+      view.data.touch = "true";
 
-//       // create a pretty date from `published`
-//       view.data.printDate = moment(view.data.published).format('MMMM Do, YYYY');
-//     }
-//     next(null, view);
-// });
+      // create a pretty date from `published`
+      // view.data.printDate = moment(view.data.published).format('MMMM Do, YYYY');
+    }
+    next(null, view);
+});
 /**
  * Had issues registering middleware for newsIndex because I couldn't understand
  * how plurification worked. Renamed it newslist(s) and everything is fine
@@ -129,7 +130,8 @@ app.task('newspager', function(cb){
    * Each pageObj will be turned into a Vinyl object when passed
    * to app.newslist()
    */
-  newsPaginated.forEach(function(page, i){
+  newsPaginated.forEach(function(newsPage, i){
+    var page = clone(newsPage);
     page.firstTolast = firstTolast;
     page.title = 'News Releases';
     page.layout = 'pagin.hbs';

@@ -9,7 +9,7 @@ layout: default
         vinyl object with the usual attribues  -->
   {{#each items}}
     <p><a href='{{data.finalPath}}' >{{data.title}}</a><br>
-    {{data.printDate}}  </p>
+    <i>{{date data.published 'MMMM Do YYYY'}} </i>  </p>
   {{/each}}
 
 {{!--   {{#each items}}

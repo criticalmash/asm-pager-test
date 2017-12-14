@@ -18,9 +18,18 @@
     <p><i>Experimenting with collections here.</i></p>
     <p>Year is {{year}}</p>
     {{#newsitems}}
-      {{#each (sortBy items "data.published") as |item|}}
-        <br>{{item.data.title}} - {{year}}
-      {{/each}}
+      {{#withSort items "data.published" reverse="true" }}
+        <br>{{this.data.title}}  {{this.data.finalPath}} <i>{{date this.data.published 'MMMM Do YYYY'}} </i> {{this.data.featured}}
+      {{/withSort }}
+    {{/newsitems}}
+
+    <h2>Featured</h2>
+    {{#newsitems}}
+      {{#filter items true property="data.featured"}}
+        <br>{{this.data.title}} <i>{{date this.data.published 'MMMM Do YYYY'}} </i>
+      {{else}}
+        no featured items<br>
+      {{/filter}}
     {{/newsitems}}
 
     <!-- find me in node_modules/midden/dist/js -->
