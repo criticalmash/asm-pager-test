@@ -4,7 +4,8 @@
   "description": "Testing pagination methods for Assemble.js",
   "main": "assemble",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node node_modules/.bin/assemble deploy --environment=production"
   },
   "repository": {
     "type": "git",
