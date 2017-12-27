@@ -174,7 +174,7 @@ app.task('content', ['layouts', 'newspager'], function() {
 /* copies html and yaml files to build */
 app.task('admin', function adminPagesTask() {
   return app.src('admin/**/*.{html,yml}')
-    .pipe(app.dest('build/admin'))
+    .pipe(app.dest('dist/admin'))
     .pipe(browserSync.stream());
 });
 
