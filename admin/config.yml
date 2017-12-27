@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  repo: criticalmash/asm-pager-test # Path to your Github repository
+  branch: master # Branch to update (master by default)
+
+media_folder: "images/uploads" # Folder where user uploaded files should go
+
+collections: # A list of collections the CMS should be able to edit
+  - name: "page" # Used in routes, e.g., /admin/collections/:slug/edit
+    label: "Pages" # Used in the UI, e.g., "New Post"
+    folder: "templates/content" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - {label: "Title", name: "title", widget: "string", tagname: "h1"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "news" # Used in routes, e.g., /admin/collections/:slug/edit
+    label: "News" # Used in the UI, e.g., "New Post"
+    folder: "templates/news" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields each document in this collection have
+      - {label: "Title", name: "title", widget: "string", tagname: "h1"}
+      - {label: "Body", name: "body", widget: "markdown"}

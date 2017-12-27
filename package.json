@@ -27,7 +27,8 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-extname": "^0.2.2",
     "handlebars-helpers": "^0.10.0",
-    "moment": "^2.19.2"
+    "moment": "^2.19.2",
+    "navigation-helpers": "^0.2.0"
   },
   "devDependencies": {
     "assemble": "^0.24.3"

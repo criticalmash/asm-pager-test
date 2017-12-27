@@ -6,6 +6,7 @@
     <title>{{title}}</title>
     <!-- find me in node_modules/midden/dist/styles -->
     <link rel="stylesheet" href="/midden.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <nav>
@@ -30,6 +31,13 @@
       {{else}}
         no featured items<br>
       {{/filter}}
+    {{/newsitems}}
+
+    <p>Using collectionQuery</p> 
+    {{#newsitems}}
+      {{#collectionQuery items key='data.featured' value=true sortBy='data.published' sortDir='desc'}}
+        <br>{{this.data.title}} <i>{{date this.data.published 'MMMM Do YYYY'}} </i>
+      {{/collectionQuery}}
     {{/newsitems}}
 
     <!-- find me in node_modules/midden/dist/js -->
