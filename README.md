@@ -19,7 +19,7 @@ The paginator function adds many useful data attributes you can use while templa
 
 By default, the `view.data` inside the sublists doesn't contain any useful path data for constructing root-relative URLS. I created a simple middleware to add that data to each sublist item before rendering. [I'll probably replace this with permalinks at some point.]
 
-I've also had problems using other helpers (like moment) inside the `#each` loop that iterates over the posts. Something about Assemble List collections is keeping me from calling these helpers. After trying several different approaches, I decided to move all business logic (even simple things like date formatting) out of the templates and into the middleware. See this post [Handlebars Considered Harmful](https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/index.html) for some background.
+I've also had problems using other helpers (like moment) inside the `#each` loop that iterates over the posts. ~~Something about Assemble List collections is keeping me from calling these helpers.~~ (fixed by @doowb THX) ~~After trying several different approaches, I decided to move all business logic (even simple things like date formatting) out of the templates and into the middleware.~~ See this post [Handlebars Considered Harmful](https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/index.html) for some background. (Note: Jan 2018, while my handlebars issues are fixed and I'm able to use the handlebars-helpers whereever I like in my templates, it still might be a good idea to read that post. I'm not planning to quit handlebars anytime soon, but it can be abused.)
 
 ## To Run Example
 Clone repo and cd into it
