@@ -189,12 +189,12 @@ app.task('serve', function () {
 });
 
 app.task('watch', function () {
-  app.watch('templates/**/*.hbs', ['content']);
+  app.watch('templates/**/*.hbs', ['admin', 'content']);
 });
 
 app.task('deploy', ['admin', 'content']);
 
 // build site, serve then watch for edits
-app.task('default', ['content'], app.parallel(['serve', 'watch']));
+app.task('default', ['admin', 'content'], app.parallel(['serve', 'watch']));
 
 module.exports = app;
