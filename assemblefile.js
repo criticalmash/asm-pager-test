@@ -105,7 +105,10 @@ app.task('newspager', function(cb){
 
   // turn page collection into a list collection sorted by publication date descending
   // NOTE: assemble appears to automatically convert YFM values labeled published into a date obj
-  var newsList = app.list(app.newsitems).sortBy('data.published', {reverse: true});
+  var newsList = app.list(app.newsitems).sortBy('data.published', {reverse: true}).filter(function(item){
+    // console.log(item.data.title);
+    return true; //item.data.title.length < 6;
+  });
 
   // use List's built-in paginator function to create a paginated list
   // 7 posts at 5 posts per page will give us two items
